@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="login">
+        <h1>Api Doc</h1>
+        <h2>Registration et login</h2>
+        <h3>Registration :</h3>
+        <p>Afin de vous enregistrer dans l'application il faut passer par la route <strong>https://oscadeberranger.com/partielApi/register</strong></p>
+        <p>Passez a votre requête le body suivant (avec vos identifiants et mots de passe) : <br>
+            <strong>
+                {<br>
+                "email":"votre@mail.com",<br>
+                "password":"motdepassesécurisé"<br>
+                }
+            </strong>
+        </p>
+        <h3>Login :</h3>
+        <p>Afin de vous login dans l'application il faut passer par la route <strong>https://oscadeberranger.com/partielApi/api/login_check</strong></p>
+        <p>Passez a votre requête le body suivant (avec vos identifiants et mots de passe) : <br>
+            <strong>
+                {<br>
+                "email":"votre@mail.com",<br>
+                "password":"motdepassesécurisé"<br>
+                }
+            </strong>
+        </p>
+    </div>
+    <div class="event">
+        <h2>Événements : </h2>
+        <h3>Création d'événements</h3>
+        <p>Pour créer un événement il faut que vous soyez connecté, Passez par la route <strong>https://oscadeberranger.com/partielApi/api/event/create</strong></p>
+        <p>Passez a votre requête le body suivant : <br>
+            <strong>
+                {<br>
+                "lieu":"nom du lieu de l'événement", <br>
+                "description":"description de votre événement", <br>
+                "tempStartOn": "date de début de l'événement", <br>
+                "tempEndOn": "date de fin de l'événement", <br>
+                "status": "si l'événement est public ou privé", <br>
+                "type_de_lieu": "ou s'organisera votre événement ex restaurant" <br>
+                }
+            </strong>
+        </p>
+
+        <hr>
+        <p>En cas d'érreur il est possible de changer la date de début et de fin sur les urls :<strong>Date de début : <strong>https://oscadeberranger.com/partielApi/api/event/updateStartDate/idEvent</strong> Date de fin :https://oscadeberranger.com/partielApi/api/event/updateEndDate/idEvent</strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/event/updateEndDate/1</strong>
+        ajouter dans le body :
+            <br>{<br>
+            "tempStartOn":"2022-12-18"<br>
+            }<br>
+            ou alors "tempEndOn" selon la date que vous changez
+
+        </p>
+create
+        <h3>Liste d'événements</h3>
+        <p>Il est possible d'obtenir une liste des événements avec l'url : <strong>https://oscadeberranger.com/partielApi/api/event/getPublicEvent</strong></p>
+        <p>Il est possible d'obtenir une liste des événements privés avec l'url : <strong>https://oscadeberranger.com/partielApi/api/event/getPrivateEvent</strong></p>
+
+        <h3>Rejoindre un événement privé / public</h3>
+        <h4>Public</h4>
+        <p>Tout le monde peut rejoindre un événement public il faut passer par la route <strong>https://oscadeberranger.com/partielApi/api/event/participate/id_de_l_évenement</strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/event/participate/1</strong> ici je participe au tournoi d'id 1</p>
+        <h4>Privé</h4>
+        <h4>Invitations</h4>
+        <p>Pour rejoindre un événement privé il faut avoir une invitation crée par un organisateur de l'événement</p>
+        <p>Pour créer cette invitation il faut passer par la route <strong>https://oscadeberranger.com/partielApi/api/invitation/create/id_user_a_inviter/_id_de_l_evenement</strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/invitation/create/1/2</strong> ici l'utilisateur d'id 1 participe à l'événement 2</p>
+        <hr>
+        <p>Un utilisateur peut voir la liste de ses invitations sur l'url : <strong>https://oscadeberranger.com/partielApi/api/user/getInvitations </strong></p>
+        <hr>
+        <p>Ensuite un l'utilisateur invité doit accepter cette invitation</p>
+        <p>Pour voir ses invitation il peut aller sur l'url <strong>https://oscadeberranger.com/partielApi/api/user/getInvitation</strong> cela ressortira les invitations de l'utilisateur connecté</p>
+        <hr>
+        <p>Pour accepter une invitation il faut aller sur l'url <strong>https://oscadeberranger.com/partielApi/api/private/event/participate/id_de_l'invitations</strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/private/event/participate/1</strong> Ici si l'utilisateur connecté est l'utilisateur dont l'invitation 1 est destiné alors il accepte</p>
+        <hr>
+        <p>Pour décliner une invitation il faut aller sur l'url <strong>https://oscadeberranger.com/partielApi/api/invitation/decline/id_de_l'invitations</strong></p>
+
+        <h3>Information sur un événement</h3>
+        <p>Pour obtenir la liste des invités il faut participer a l'événement et aller sur l'url <strong>https://oscadeberranger.com/partielApi/api/event/getUserList/id_de_l'événement</strong> </p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/private/event/getUserList/1</strong> On obtient la liste des invités de l'événement 1</p>
+        <hr>
+        <p>Un utilisateur peut aussi obtenir la liste des événements auquel il participe pour cela il doit aller sur l'url <strong>https://oscadeberranger.com/partielApi/api/user/getEvents </strong></p>
+        <hr>
+        <p>Pour obtenir le statut d'un événement (prévus ou annulé) il faut aller sur l'url : <strong>https://oscadeberranger.com/partielApi/api/event/status/id_de_l'événement </strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/event/status/1 </strong> Statut de l'événement 1</p>
+
+        <hr>
+        <p>Il est possible de promouvoir un utilisateur au grade d'organisateur avec la route <strong>https://oscadeberranger.com/partielApi/api/private/event/promote/userId/eventId </strong></p>
+        <p>Exemple :  <strong>https://oscadeberranger.com/partielApi/api/private/event/promote/2/1 </strong> ici l'utilisateur 2 est organisateur de l'événement 1</p>
+
+        <hr>
+        <p>En cas de mauvaise manipulation il est possible de démouvoir un organisateur au rang de participant avec l'url : <strong>https://oscadeberranger.com/partielApi/api/private/event/demote/userId/eventId </strong> </p>
+        <p>Exemple :  <strong>https://oscadeberranger.com/partielApi/api/private/event/depromote/2/1 </strong> ici l'utilisateur 2 est participant de l'événement 1</p>
+    </div>
+    <div class="suggestion">
+        <h2>Suggestion : </h2>
+        <p>Les organisateurs d'événements peuvent ajouter des suggestions avec l'url<strong>https://oscadeberranger.com/partielApi/api/suggestion/create/id_de_l'événement </strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/suggestion/create/1 </strong></p>
+        <p>Passez a votre requete le body suivant
+        <hr><strong>
+            {
+            <hr>"title": "boissons"
+            <hr>}
+        </strong>
+         ici la suggestion boissons sera ajouté a l'événement 1
+        </p>
+
+
+        <h3>Prise en charge</h3>
+        <p>Les invités comme les organisateur peuvent prendre en charge une suggestion</p>
+        <p>Pour cela ils doivent aller sur l'url <strong>https://oscadeberranger.com/partielApi/api/suggestion/takeCareOf/id_de_la_suggestion </strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/suggestion/takeCareOf/1 </strong> Ici l'utilisateur connecté prendra en compte la suggestion 1, l'api retourera
+        un objet supported associé a l'utilisateur</p>
+        <hr>
+        <p>En cas d'erreure ou de faute de gout il est possbile pour l'utilisateur ayant pris en charge la suggestion ainsi que pour un organisateur de supprimer cette prise en charge sur l'url <strong>https://oscadeberranger.com/partielApi/api/suggestion/unTakeCareOf/id_de_la_suggestion </strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/suggestion/utakeCareOf/1 </strong> La suggestion 1 sera supprimé </p>
+        <hr>
+        <p>Il est possible de voire toute les suggestion  <strong>https://oscadeberranger.com/partielApi/api/suggestion/getSuggestions/id_de_événement </strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/suggestion/getSuggestions/1 </strong> ici on obtien les suggestion de l'événement 1</p>
+        <hr>
+        <p>Il est possible de voire toute les prise en charge  <strong>https://oscadeberranger.com/partielApi/api/suggestion/getSupported/id_de_événement </strong></p>
+        <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/suggestion/getSupported/1 </strong> ici on obtien les prises en charge de l'événement 1</p>
+    </div>
+{% endblock %}
