@@ -1,8 +1,5 @@
-{% extends 'base.html.twig' %}
+url documentation : https://oscadeberranger.com/PartielApi
 
-{% block title %}Hello HomeController!{% endblock %}
-
-{% block body %}
     <div class="login">
         <h1>Api Doc</h1>
         <h2>Registration et login</h2>
@@ -125,4 +122,4 @@ create
         <p>Il est possible de voire toute les prise en charge  <strong>https://oscadeberranger.com/partielApi/api/suggestion/getSupported/id_de_événement </strong></p>
         <p>Exemple : <strong>https://oscadeberranger.com/partielApi/api/suggestion/getSupported/1 </strong> ici on obtien les prises en charge de l'événement 1</p>
     </div>
-{% endblock %}
+
